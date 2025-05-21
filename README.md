@@ -4,7 +4,7 @@ Practice writing SQL queries using Google BigQuery and publicly available datase
 For these exercises, I used the CFPB complaints table uploaded to BigQuery as a public dataset. 
 The table schema is below:
 
-[Image - table_schema]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/cfpb_table_schema.png "bigquery-public-data.cfpb_complaints.complaint_database")
 
 ## Beginner (1–5): SELECTs, WHERE, LIMIT, ORDER BY
 
@@ -16,7 +16,7 @@ FROM bigquery-public-data.cfpb_complaints.complaint_database
 LIMIT 10
 ```
 
-![Image - first_ten_complaints]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/first_10_complaints.png "First 10 complaints in the table")
 
 ### 2. Find all complaints related to the product "Credit card".
 
@@ -26,7 +26,7 @@ FROM bigquery-public-data.cfpb_complaints.complaint_database
 WHERE product = "Credit card"
 ```
 
-[Image - credit_card_complaints]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/credit_card_complaints.png "All complaints related to credit cards")
 
 ### 3. Count how many complaints were submitted via the "Web".
 
@@ -36,7 +36,7 @@ FROM bigquery-public-data.cfpb_complaints.complaint_database
 WHERE submitted_via = "Web"
 ```
 
-[Image - count_web_complaints]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/count_web_complaints.png "Total number of complaints submitted online")
 
 ### 4. Find the top 5 states with the highest number of complaints.
 
@@ -47,7 +47,7 @@ GROUP BY state
 ORDER BY number_of_complaints DESC LIMIT 5
 ```
 
-[Image - top_five_states]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/top_five_states.png "These states had the highest number of complaints")
 
 ### 5. Retrieve complaints where timely_response is false.
 
@@ -57,7 +57,7 @@ FROM bigquery-public-data.cfpb_complaints.complaint_database
 WHERE timely_response = FALSE
 ```
 
-[Image - timely_response_false]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/timely_response_false.png "These complaints were not considered to be handled in a timely manner")
 
 ## Intermediate: GROUP BY, Aggregrates, Fil;tering, Subqueries
 
@@ -70,7 +70,7 @@ GROUP BY month
 ORDER BY month
 ```
 
-[Image - monthly_complaints]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/monthly_complaints.png "Total number of complaints received for each month in the table")
 
 ### 7. Find the most common issue consumers report.
 
@@ -81,7 +81,7 @@ GROUP BY issue
 ORDER BY number_of_complaints DESC LIMIT 1
 ```
 
-[Image - most_common_issue]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/most_common_issue.png "The most common issue reported by consumers")
 
 ### 8. Show how many disputes (consumer_disputed = TRUE) each company has had.
 
@@ -93,7 +93,7 @@ GROUP BY company_name
 ORDER BY number_of_disputes DESC
 ```
 
-[Image - disputes_by_company]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/disputes_by_company.png "The total number of disputed claims for each company")
 
 ### 9. Find the average number of complaints submitted per state.
 
@@ -106,22 +106,19 @@ FROM (
 )
 ```
 
-[Image - average_complaints_per_state]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/average_complaints_per_state.png "The average number of complaints per state")
 
 ### 10. List all companies that received more than 500 complaints.
 
 ```sql
-SELECT *
-FROM (
-  SELECT company_name, COUNT(*) AS number_of_complaints
-  FROM bigquery-public-data.cfpb_complaints.complaint_database
-  GROUP BY company_name
-)
-WHERE number_of_complaints > 500
+SELECT company_name, COUNT(*) as number_of_complaints
+FROM bigquery-public-data.cfpb_complaints.complaint_database
+GROUP BY company_name
+HAVING number_of_complaints > 500
 ORDER BY number_of_complaints DESC
 ```
 
-[Image - companies_over_500]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/companies_over_500.png "These companies all had over 500 complaints lodged against them")
 
 ### 11. Show the number of complaints for each combination of product and subproduct.
 
@@ -132,7 +129,7 @@ GROUP BY product, subproduct
 ORDER BY product, number_of_complaints DESC
 ```
 
-[Image - product_subproduct_complaints]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/product_subproduct_complaints.png "The number of complaints for each combination of product and subproduct")
 
 ### 12. Find the number of complaints that included a consumer_complaint_narrative.
 
@@ -142,23 +139,20 @@ FROM bigquery-public-data.cfpb_complaints.complaint_database
 WHERE consumer_complaint_narrative IS NOT NULL
 ```
 
-[Image - consumer_narrative]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/consumer_narrative.png "These complaints all include a description given by the consumer")
 
 ### 13. List the companies with at least 100 complaints where the company_response_to_consumer was "Closed with explanation".
 
 ```sql
-SELECT *
-FROM (
-  SELECT company_name, COUNT(*) AS number_of_closed_with_explanation
-  FROM bigquery-public-data.cfpb_complaints.complaint_database
-  WHERE company_response_to_consumer = "Closed with explanation"
-  GROUP BY company_name
-)
-WHERE number_of_closed_with_explanation >= 100
+SELECT company_name, COUNT(*) as number_of_closed_with_explanation
+FROM bigquery-public-data.cfpb_complaints.complaint_database
+WHERE company_response_to_consumer = "Closed with explanation"
+GROUP BY company_name
+HAVING number_of_closed_with_explanation >= 100
 ORDER BY number_of_closed_with_explanation DESC
 ```
 
-[Image - companies_closed_with_explanation]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/companies_closed_with_explanation.png "These companies al have at least 100 complaints that are closed with an explanation")
 
 ### 14. Find the proportion of complaints with a timely response by product.
 
@@ -168,19 +162,21 @@ SELECT
   B.number_of_timely,
   A.total_number_of_complaints,
   ROUND(B.number_of_timely * 100 / A.total_number_of_complaints, 2) AS proportion_of_timely_responses
-FROM 
-  (SELECT product, COUNT(*) AS total_number_of_complaints
+FROM (
+  SELECT product, COUNT(*) AS total_number_of_complaints
   FROM bigquery-public-data.cfpb_complaints.complaint_database
-  GROUP BY product) AS A
-JOIN 
-  (SELECT product, COUNT(*) AS number_of_timely
+  GROUP BY product
+) AS A
+JOIN (
+  SELECT product, COUNT(*) AS number_of_timely
   FROM bigquery-public-data.cfpb_complaints.complaint_database
   WHERE timely_response = TRUE
-  GROUP BY product) AS B
+  GROUP BY product
+) AS B
 ON A.product = B.product
 ORDER BY proportion_of_timely_responses DESC
 ```
-[Image - proportion_of_timely_responses]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/proportion_of_timely_responses.png "The percentage of timely responses vs. total complaints for each product")
 
 ## Advanced (15-20): Window Functions, Date Math, CTEs, CASE, Complex Filters
 
@@ -192,24 +188,27 @@ FROM bigquery-public-data.cfpb_complaints.complaint_database
 GROUP BY company_name
 ```
 
-[Image - earliest_complaint_by_company]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/earliest_complaint_by_company.png "The date of the first complaint received for each company")
 
 ### 16. For each state, calculate the average number of days between date_received and date_sent_to_company.
 
 ```sql
-SELECT state, 
+SELECT
+  state, 
   ROUND(AVG(DATE_DIFF(date_sent_to_company, date_received, DAY)), 3) AS average_days_between_sent_received
 FROM bigquery-public-data.cfpb_complaints.complaint_database
 GROUP BY state
 ORDER BY average_days_between_sent_received DESC
 ```
 
-[Image - average_days_between_sent_received]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/average_days_between_sent_received.png "The average number of days between the receipt of the complaint and the date which the complaint was sent to the company, for each state")
   
 ### 17. Create a ranking of companies based on the number of disputes (consumer_disputed = TRUE) using a window function.
 
 ```sql
-SELECT company_name, COUNT(*) AS total_disputes,
+SELECT
+  company_name,
+  COUNT(*) AS total_disputes,
   RANK() OVER(ORDER BY COUNT(*) DESC) AS dispute_rank
 FROM bigquery-public-data.cfpb_complaints.complaint_database
 WHERE consumer_disputed = TRUE
@@ -217,7 +216,7 @@ GROUP BY company_name
 ORDER BY dispute_rank
 ```
 
-[Image - dispute_ranking]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/dispute_ranking.png "Ranking of the coompanies with the most disputed complaints")
 
 ### 18. Using a CASE statement, categorize complaints into:
   - "Fast" if sent to company on the same day it was received
@@ -225,19 +224,19 @@ ORDER BY dispute_rank
   - "Unknown" if date_sent_to_company is null
 
 ```sql
-SELECT complaint_id,
+SELECT
+  complaint_id,
   CASE
     WHEN date_sent_to_company IS NULL THEN "Unknown"
     WHEN DATE_DIFF(date_sent_to_company, date_received, DAY) < 1 THEN "Fast"
     WHEN DATE_DIFF(date_sent_to_company, date_received, DAY) >= 1  THEN "Delayed"
     ELSE "Error"
-    END
-    AS complaint_category
+    END AS complaint_category
 FROM bigquery-public-data.cfpb_complaints.complaint_database
 LIMIT 1000
 ```
 
-[Image - complaint_category]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/complaint_category.png "Categorizing complaints as being handled Fast, Delayed, or Unknown")
 
 ### 19. Write a CTE to find the total complaints per company, and from that CTE, return companies with more than 1,000 total complaints and less than 10 disputed ones.
 
@@ -259,7 +258,7 @@ SELECT company_name, total_complaints, total_disputed
 FROM company_complaints
 WHERE total_complaints > 1000 AND total_disputed < 10
 ```
-[Image - CTE_total_complaints]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/CTE_total_complaints.png "Companies with more than 1,000 total complaints and less than 10 disputed ones")
 
 ### 20. Find the percentage of complaints per company that resulted in a timely response, and rank companies by this percentage in descending order.
 
@@ -274,10 +273,13 @@ WITH most_timely_companies AS (
   GROUP BY company_name
 )
 
-SELECT company_name, total_number_of_complaints, number_of_timely, percentage_timely,
+SELECT
+  company_name,
+  total_number_of_complaints,
+  number_of_timely, percentage_timely,
   RANK() OVER(ORDER BY percentage_timely DESC) AS timely_rank
 FROM most_timely_companies
 ORDER BY timely_rank
 ```
 
-[Image - most_timely_companies]
+![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/most_timely_companies.png "Ranking the companies by the percentage of timely responses vs. total complaints")
