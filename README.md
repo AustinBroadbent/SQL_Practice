@@ -8,7 +8,8 @@ The table schema is below:
 
 ## Beginner (1–5): SELECTs, WHERE, LIMIT, ORDER BY
 
-### 1. List the first 10 complaints with their complaint_id, product, and date_received.
+<details>
+<summary>1. List the first 10 complaints with their complaint_id, product, and date_received.</summary>
 
 ```sql
 SELECT complaint_id, product, date_received
@@ -17,8 +18,10 @@ LIMIT 10
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/first_10_complaints.png "First 10 complaints in the table")
+</details>
 
-### 2. Find all complaints related to the product "Credit card".
+<details>
+<summary>2. Find all complaints related to the product "Credit card".</summary>
 
 ```sql
 SELECT *
@@ -27,8 +30,10 @@ WHERE product = "Credit card"
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/credit_card_complaints.png "All complaints related to credit cards")
+</details>
 
-### 3. Count how many complaints were submitted via the "Web".
+<details>
+<summary>3. Count how many complaints were submitted via the "Web".</summary>
 
 ```sql
 SELECT COUNT(*) AS submitted_via_web
@@ -37,8 +42,10 @@ WHERE submitted_via = "Web"
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/count_web_complaints.png "Total number of complaints submitted online")
+</details>
 
-### 4. Find the top 5 states with the highest number of complaints.
+<details>
+<summary>4. Find the top 5 states with the highest number of complaints.</summary>
 
 ```sql
 SELECT state, COUNT(*) AS number_of_complaints
@@ -48,8 +55,10 @@ ORDER BY number_of_complaints DESC LIMIT 5
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/top_five_states.png "These states had the highest number of complaints")
+</details>
 
-### 5. Retrieve complaints where timely_response is false.
+<details>
+<summary>5. Retrieve complaints where timely_response is false.</summary>
 
 ```sql
 SELECT *
@@ -58,10 +67,12 @@ WHERE timely_response = FALSE
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/timely_response_false.png "These complaints were not considered to be handled in a timely manner")
+</details>
 
-## Intermediate: GROUP BY, Aggregrates, Fil;tering, Subqueries
+## Intermediate: GROUP BY, Aggregates, Filtering, Subqueries
 
-### 6. Count the number of complaints received each month.
+<details>
+<summary>6. Count the number of complaints received each month.</summary>
 
 ```sql
 SELECT FORMAT_DATE('%Y-%m', date_received) AS month, COUNT(*) AS number_of_complaints
@@ -71,8 +82,10 @@ ORDER BY month
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/monthly_complaints.png "Total number of complaints received for each month in the table")
+</details>
 
-### 7. Find the most common issue consumers report.
+<details>
+<summary>7. Find the most common issue consumers report.</summary>
 
 ```sql
 SELECT issue, COUNT(*) AS number_of_complaints
@@ -82,8 +95,10 @@ ORDER BY number_of_complaints DESC LIMIT 1
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/most_common_issue.png "The most common issue reported by consumers")
+</details>
 
-### 8. Show how many disputes (consumer_disputed = TRUE) each company has had.
+<details>
+<summary>8. Show how many disputes (consumer_disputed = TRUE) each company has had.</summary>
 
 ```sql
 SELECT company_name, COUNT(*) AS number_of_disputes
@@ -94,8 +109,10 @@ ORDER BY number_of_disputes DESC
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/disputes_by_company.png "The total number of disputed claims for each company")
+</details>
 
-### 9. Find the average number of complaints submitted per state.
+<details>
+<summary>9. Find the average number of complaints submitted per state.</summary>
 
 ```sql
 SELECT AVG(number_of_complaints) AS average_complaints_per_state
@@ -107,8 +124,10 @@ FROM (
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/average_complaints_per_state.png "The average number of complaints per state")
+</details>
 
-### 10. List all companies that received more than 500 complaints.
+<details>
+<summary>10. List all companies that received more than 500 complaints.</summary>
 
 ```sql
 SELECT company_name, COUNT(*) as number_of_complaints
@@ -119,8 +138,10 @@ ORDER BY number_of_complaints DESC
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/companies_over_500.png "These companies all had over 500 complaints lodged against them")
+</details>
 
-### 11. Show the number of complaints for each combination of product and subproduct.
+<details>
+<summary>11. Show the number of complaints for each combination of product and subproduct.</summary>
 
 ```sql
 SELECT product, subproduct, COUNT(*) AS number_of_complaints
@@ -130,8 +151,10 @@ ORDER BY product, number_of_complaints DESC
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/product_subproduct_complaints.png "The number of complaints for each combination of product and subproduct")
+</details>
 
-### 12. Find the number of complaints that included a consumer_complaint_narrative.
+<details>
+<summary>12. Find the number of complaints that included a consumer_complaint_narrative.</summary>
 
 ```sql
 SELECT COUNT(*) AS complaints_with_consumer_narrative
@@ -140,8 +163,10 @@ WHERE consumer_complaint_narrative IS NOT NULL
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/consumer_narrative.png "These complaints all include a description given by the consumer")
+</details>
 
-### 13. List the companies with at least 100 complaints where the company_response_to_consumer was "Closed with explanation".
+<details>
+<summary>13. List the companies with at least 100 complaints where the company_response_to_consumer was "Closed with explanation".</summary>
 
 ```sql
 SELECT company_name, COUNT(*) as number_of_closed_with_explanation
@@ -153,8 +178,10 @@ ORDER BY number_of_closed_with_explanation DESC
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/companies_closed_with_explanation.png "These companies al have at least 100 complaints that are closed with an explanation")
+</details>
 
-### 14. Find the proportion of complaints with a timely response by product.
+<details>
+<summary>14. Find the proportion of complaints with a timely response by product.</summary>
 
 ```sql
 SELECT 
@@ -177,10 +204,12 @@ ON A.product = B.product
 ORDER BY proportion_of_timely_responses DESC
 ```
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/proportion_of_timely_responses.png "The percentage of timely responses vs. total complaints for each product")
+</details>
 
 ## Advanced (15-20): Window Functions, Date Math, CTEs, CASE, Complex Filters
 
-### 15. Identify the earliest complaint received for each company.
+<details>
+<summary>15. Identify the earliest complaint received for each company.</summary>
 
 ```sql
 SELECT company_name, MIN(date_received) AS earliest_complaint
@@ -189,8 +218,10 @@ GROUP BY company_name
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/earliest_complaint_by_company.png "The date of the first complaint received for each company")
+</details>
 
-### 16. For each state, calculate the average number of days between date_received and date_sent_to_company.
+<details>
+<summary>16. For each state, calculate the average number of days between date_received and date_sent_to_company.</summary>
 
 ```sql
 SELECT
@@ -202,8 +233,10 @@ ORDER BY average_days_between_sent_received DESC
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/average_days_between_sent_received.png "The average number of days between the receipt of the complaint and the date which the complaint was sent to the company, for each state")
-  
-### 17. Create a ranking of companies based on the number of disputes (consumer_disputed = TRUE) using a window function.
+</details>
+
+<details>
+<summary>17. Create a ranking of companies based on the number of disputes (consumer_disputed = TRUE) using a window function.</summary>
 
 ```sql
 SELECT
@@ -217,8 +250,10 @@ ORDER BY dispute_rank
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/dispute_ranking.png "Ranking of the coompanies with the most disputed complaints")
+</details>
 
-### 18. Using a CASE statement, categorize complaints into:
+<details>
+<summary>18. Using a CASE statement, categorize complaints into:</summary>
   - "Fast" if sent to company on the same day it was received
   - "Delayed" if sent after 1 or more days
   - "Unknown" if date_sent_to_company is null
@@ -237,8 +272,10 @@ LIMIT 1000
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/complaint_category.png "Categorizing complaints as being handled Fast, Delayed, or Unknown")
+</details>
 
-### 19. Write a CTE to find the total complaints per company, and from that CTE, return companies with more than 1,000 total complaints and less than 10 disputed ones.
+<details>
+<summary>19. Write a CTE to find the total complaints per company, and from that CTE, return companies with more than 1,000 total complaints and less than 10 disputed ones.</summary>
 
 ```sql
 WITH company_complaints AS (
@@ -259,8 +296,10 @@ FROM company_complaints
 WHERE total_complaints > 1000 AND total_disputed < 10
 ```
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/CTE_total_complaints.png "Companies with more than 1,000 total complaints and less than 10 disputed ones")
+</details>
 
-### 20. Find the percentage of complaints per company that resulted in a timely response, and rank companies by this percentage in descending order.
+<details>
+<summary>20. Find the percentage of complaints per company that resulted in a timely response, and rank companies by this percentage in descending order.</summary>s
 
 ```sql
 WITH most_timely_companies AS (
@@ -283,3 +322,4 @@ ORDER BY timely_rank
 ```
 
 ![alt text](https://github.com/AustinBroadbent/SQL_Practice/blob/main/images/most_timely_companies.png "Ranking the companies by the percentage of timely responses vs. total complaints")
+</details>
