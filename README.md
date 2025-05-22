@@ -315,7 +315,8 @@ WITH most_timely_companies AS (
 SELECT
   company_name,
   total_number_of_complaints,
-  number_of_timely, percentage_timely,
+  number_of_timely,
+  percentage_timely,
   RANK() OVER(ORDER BY percentage_timely DESC) AS timely_rank
 FROM most_timely_companies
 ORDER BY timely_rank
